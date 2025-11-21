@@ -7,18 +7,18 @@ typedef unsigned char  __data             UINT8D;
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-#include "CH559.h"
+// #include "CH559.h"
+#include "register.h"
 #include "util.h"
 #include "USBHost.h"
 
-void main() {
-    initClock();
-    initUART0(115200, 1);
-    DEBUG_OUT("Startup\n");
+void main(void) {
+    clock_init();
+    uart0_init(115200, 1);
+    DEBUG("Startup\n");
     initUSB_Host();
-    DEBUG_OUT("Ready\n");
+    DEBUG("Ready\n");
     while(1) {
-        if(!(P4_IN & (1 << 6))) { runBootloader(); }
         checkRootHubConnections();
     }
 }

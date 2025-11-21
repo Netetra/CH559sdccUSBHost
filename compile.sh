@@ -18,9 +18,9 @@ COMMON_OPTS="-V -mmcs51 --model-large --xram-size ${xram_size} --xram-loc ${xram
 sdcc -c $COMMON_OPTS main.c
 sdcc -c $COMMON_OPTS util.c
 sdcc -c $COMMON_OPTS USBHost.c
-sdcc -c $COMMON_OPTS uart.c
+# sdcc -c $COMMON_OPTS uart.c
 
-sdcc main.rel util.rel USBHost.rel uart.rel $COMMON_OPTS -o ${project_name}.ihx
+sdcc main.rel util.rel USBHost.rel $COMMON_OPTS -o ${project_name}.ihx
 
 packihx ${project_name}.ihx > ${project_name}.hex
 

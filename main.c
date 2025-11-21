@@ -10,27 +10,15 @@ typedef unsigned char  __data             UINT8D;
 #include "CH559.h"
 #include "util.h"
 #include "USBHost.h"
-#include "uart.h"
 
-SBIT(LED, 0x90, 6);
-
-void main()
-{
-    unsigned char s;
+void main() {
     initClock();
     initUART0(115200, 1);
     DEBUG_OUT("Startup\n");
-    resetHubDevices(0);
-    resetHubDevices(1);
     initUSB_Host();
     DEBUG_OUT("Ready\n");
-	sendProtocolMSG(MSG_TYPE_STARTUP,0, 0x00, 0x00, 0x00, 0);
-    while(1)
-    {
-        if(!(P4_IN & (1 << 6)))
-            runBootloader();
-        processUart();
-        s = checkRootHubConnections();
-        pollHIDdevice();
+    while(1) {
+        if(!(P4_IN & (1 << 6))) { runBootloader(); }
+        checkRootHubConnections();
     }
 }
